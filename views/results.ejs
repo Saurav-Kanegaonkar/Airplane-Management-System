@@ -1,0 +1,29 @@
+<%- include('partials/header') -%>
+
+
+
+<div class="container">
+    <h2 style="color: black;">Results for your flight!!</h2>
+    <% foundtrips.forEach(function(a){ %>
+        <div class="col-sm-4">
+            <div class="card">
+              <div class="image">
+                <div><%= a.plane.plane_id %></div>
+                <img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 20px; padding-left: 10px;"><br>
+              </div>
+              <div class="card-inner">
+                <div class="header">
+                  <h3><%= a.departure %> To <%= a.destination %></h2><br>
+                  <h3>Economy: <i class="fas fa-rupee-sign"></i> <%= a.cost.Economy %></h3>
+              </div>
+              <div class="content" style="color: indianred; border: 1px solid lightcoral; padding-top: 5px;"> 
+                <p>Leaving Date: <%= a.leavingDate %> at <%= a.leavingTime %> hrs</p>
+                <p>Arrival Date: <%= a.arrivalDate %> at <%= a.arrivalTime %> hrs</p>
+              </div>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include('partials/footer') -%>

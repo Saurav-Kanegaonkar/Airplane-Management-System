@@ -1,0 +1,51 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1 style="font-weight: 600; color: royalblue;"><%= plane.plane_id %></h1>
+            <p>All trips of <%= plane.plane_id %>  of <%= comp.companyName %> can be seen here!!</p>
+            <p>
+                <a href="/Companies/<%= comp._id %>/<%= plane._id %>/createTrip" class="btn btn-primary btn-large">Add New Trips for <%= plane.plane_id %></a>
+            </p>
+        </div>
+    </header>
+    <table class="table" style="background-color: white;">
+        <thead>
+            <tr>
+                <th>Sr NO</th>
+                <th>Departure</th>
+                <th>Destination</th>
+                <th>Leaving Date</th>
+                <th>Arrival Date</th>
+                <th>Economy class tickets</th>
+                <th>Economy class ticket cost</th>
+                <th>Business class tickets</th>
+                <th>Business class ticket cost</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: left;">
+            <% var i=0; %>
+            <% trip.forEach(function(a){ %>
+                <tr>
+                    <td><%= 1+i %></td>
+                    <td><%= a.departure %></td>
+                    <td><%= a.destination %></td>
+                    <td><%= a.leavingDate %></td>
+                    <td><%= a.arrivalDate %></td>
+                    <td><%= plane.ticketEconomy %></td>
+                    <td><%= a.cost.Economy %></td>
+                    <td><%= plane.ticketBusiness %></td>
+                    <td><%= a.cost.Business %></td>
+                    <% i=i+1; %>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <br><br><br><br><br>
+   
+    <a href="/Companies/<%= comp._id %>" class="btn btn-lg btn-warning">Back</a>
+</div>
+
+
+<%- include('partials/footer') -%>

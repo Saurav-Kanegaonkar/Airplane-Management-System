@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Airline System</title>
+		
+        <!-- CSS -->        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
+		<link rel="stylesheet" href="/bootstrap.min.css">
+		<link rel="stylesheet" href="/app.css">
+        <link rel="stylesheet" href="/animate.css">
+		<link rel="stylesheet" href="/style.css">
+		<script src="https://kit.fontawesome.com/caacf6ad33.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+		
+		<!-- Top menu -->
+		<nav class="navbar navbar-inverse" role="navigation" style="padding-right: 20px; padding-left: 20px;">
+				<div class="navbar-header">
+					<a href="/"><i class="fa fa-plane" aria-hidden="true" style="font-size:46px; padding-top: 13px;">Aero-Plano</i>
+					</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/landing">Home</a></li>
+						<% if(currentUser){ %>
+							<li><a href="/logout">Logout</a></li>
+							<li><a href="profile"><%= currentUser.username %></a></li>
+						<% } else{ %>
+							<li><a href="/login">Login</a></li>
+							<li><a href="/register">Register</a></li>
+						<% } %>
+					</ul>
+				</div>
+		</nav>
+		<div class="container">
+            <% if(error && error.length>0 ){ %>
+                <div class="alert alert-danger" role="alert">
+                    <h3><%= error %></h3>
+                </div>
+            <% } %>
+            <% if(success && success.length>0 ){ %>
+                <div class="alert alert-success" role="alert">
+                    <h3><%= success %></h3>
+                </div>
+            <% } %>
+        </div>

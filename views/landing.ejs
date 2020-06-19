@@ -1,0 +1,113 @@
+<%- include('partials/header1') -%>
+            <form action="/landing" method="POST">
+                <div class="input-group">
+                    <label class="label"><h2>Search your trip</h2></label>
+                    <div class="p-t-10">
+                        <label class="radio-container m-r-45">One Way
+                            <input type="radio" name="trip" onclick="disableTxt()" value="oneWay" checked>
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="radio-container">Round Trip
+                            <input type="radio" name="trip" onclick="undisableTxt()" value="round">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="label">Departure <i class="fas fa-plane-departure" aria-hidden="true"></i></label>
+                        <select name="departure" class="form-control form-control-lg" style="height: 54px; padding-left: 75px; font-size: large;">
+                            <option>Mumbai</option>
+                            <option>New Delhi</option>
+                            <option>Kolkata</option>
+                            <option>Pune</option>
+                            <option>Hyderabad</option>
+                            <option>Bangalore</option>
+                            <option>Chennai</option>
+                            <option>Jaipur</option>
+                            <option>Lucknow</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="label">Arrival <i class="fas fa-plane-arrival"></i></label>
+                        <select name="destination" class="form-control form-control-lg" style="height: 54px; padding-left: 75px; font-size: large;">
+                            <option>New Delhi</option>
+                            <option>Mumbai</option>
+                            <option>Kolkata</option>
+                            <option>Pune</option>
+                            <option>Hyderabad</option>
+                            <option>Bangalore</option>
+                            <option>Chennai</option>
+                            <option>Jaipur</option>
+                            <option>Lucknow</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-3">
+                        <div class="input-group">
+                            <label class="label"> Leaving Date  <i class="fa fa-calendar"></i></label>
+                            <input class="input--style-4" type="text" name="leavingDate" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;"/>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <label class="label"> Arrival Date  <i class="fa fa-calendar"></i></label>
+                            <input id="arrival" class="input--style-4" type="text" disabled value="Disabled" name="arrivalDate" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-t-15">
+                    <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <p>Want to go to the company page?
+    </p>
+    <a class="btn btn-default btn-info" href="/Companies">Click Here</a>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<script>
+    function disableTxt() {
+    document.getElementById("arrival").disabled = true;
+    document.getElementById("arrival").value = "Disabled";
+    }
+
+    function undisableTxt() {
+    document.getElementById("arrival").disabled = false;
+    document.getElementById("arrival").value = "";
+    }
+
+    $(document).ready(function(){
+    var date_Arrival=$('input[name="arrivalDate"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_Arrival.datepicker({
+        format: 'dd/mm/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    });
+    var date_Leaving =$('input[name="leavingDate"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_Leaving.datepicker({
+        format: 'dd/mm/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    })
+    })
+</script>
+
+<%- include('partials/footer') -%>

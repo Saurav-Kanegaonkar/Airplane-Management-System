@@ -1,0 +1,21 @@
+
+<%- include('partials/header1') -%>
+
+    <h2 class="title">Login Form</h2>
+    <form action="/login" method="POST" >
+
+        <div class=" p-t-15">
+            <label class="label">Email</label>
+            <input class="input--style-4" type="email" name="email" style="width: 100%; font-weight: 500;">
+        </div>
+        <br>
+        <div class="p-t-15">
+            <label class="label">Password</label>
+            <input class="input--style-4" type="password" name="password" style="width: 100%; font-weight: 500; ">
+        </div>                                                              
+        <div class="p-t-15">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+        </div>
+    </form>
+
+<%- include('partials/footer1') -%>

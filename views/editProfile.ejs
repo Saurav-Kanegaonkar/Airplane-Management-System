@@ -1,0 +1,62 @@
+<%- include('partials/header1') -%>
+
+    <h2 class="title" style="font-size: 37px;">Edit Profile</h2>
+    <form action="/profile/edit?_method=PUT" method="POST">
+        <div class="row row-space">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">first name</label>
+                    <input class="input--style-4" type="text" name="fName" style="font-weight: 600;" value="<%= currentUser.username.split(' ')[0] %>">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">last name</label>
+                    <input class="input--style-4" type="text" name="lName" style="font-weight: 600;" value="<%= currentUser.username.split(' ')[1] %>">
+                </div>
+            </div>
+        </div>
+        <div class="row row-space">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Phone Number</label>
+                    <input class="input--style-4" type="text" name="phone" style="font-weight: 600;" value="<%= currentUser.mobile %>">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Gender</label>
+                    <div class="p-t-10">
+                        <% if(currentUser.gender == "Male"){ %>
+                            <label class="radio-container m-r-45">Male
+                                <input type="radio" name="gender" value="Male" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container">Female
+                                <input type="radio" name="gender" value="Female">
+                                <span class="checkmark"></span>
+                            </label>
+                        <% } else{ %>
+                            <label class="radio-container m-r-45">Male
+                                <input type="radio" name="gender" value="Male">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container">Female
+                                <input type="radio" name="gender" value="Female" checked>
+                                <span class="checkmark"></span>
+                            </label>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>                                   
+        <div class="input-group">
+            <label class="label">Email</label>
+            <input class="input--style-4" type="email" name="email" style="width: 100%; font-weight: 600;" value="<%= currentUser.email %>">
+        </div>         
+        
+        <div class="p-t-15">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Edit</button>
+        </div>
+    </form>
+<%- include('partials/footer1') -%>

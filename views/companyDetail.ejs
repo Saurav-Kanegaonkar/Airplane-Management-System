@@ -1,0 +1,36 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1 style="font-weight: 600; color: royalblue;"><%= comp.companyName %></h1>
+            <p>All airplanes owned by <%= comp.companyName %> can be seen here!!</p>
+            <p>
+                <a href="/Companies/<%= comp._id %>/createAirplane" class="btn btn-primary btn-large">Add New Airplane Data</a>
+            </p>
+        </div>
+    </header>
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+        <% plane.forEach(function(a){ %>
+            <div class="col-md-3 col col-sm-6" >
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="header">
+                            <h3 style="color: black;" class="card-title"><strong>Plane id: <%= a.plane_id %></strong></h3>
+                            <h4>Economy Class Tickets: <%= a.ticketEconomy %></h4>
+                            <h4>Business Class Tickets: <%= a.ticketBusiness %></h4>
+                            <a href="/Companies/<%= comp._id %>/<%= a._id %>" class="btn btn-lg btn-info">More Info</a> 
+                            <a href="/Companies/<%= comp._id %>/<%= a._id %>/createTrip" class="btn btn-lg btn-primary">Add Trips</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        <% }); %>
+    </div>
+    <br><br><br><br><br>
+    <a href="/Companies" class="btn btn-lg btn-warning">Back</a>
+</div>
+
+
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,25 @@
+<%- include('partials/header1') -%>
+
+    <h2 class="title">Add new airplane data for <%= comp.companyName %></h2>
+    <form action="/Companies/<%= comp._id %>/createAirplane" method="POST">                               
+        <div class="input-group">
+            <label class="label">Airplane Number</label>
+            <input class="input--style-4" type="text" name="plane_id"  >
+        </div>
+        <div class="input-group">
+            <label class="label">Number of Economy Tickets</label>
+            <input class="input--style-4" type="text" name="ticketEconomy"  >
+        </div>
+        <div class="input-group">
+            <label class="label">Number of Business Tickets</label>
+            <input class="input--style-4" type="text" name="ticketBusiness"  >
+        </div>
+        <div class="p-t-15">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+        </div>
+    </form>
+    <br><br>
+
+    <a href="/Companies/<%= comp._id %>" class="btn btn-lg btn-warning">Back</a>
+
+<%- include('partials/footer1') -%>

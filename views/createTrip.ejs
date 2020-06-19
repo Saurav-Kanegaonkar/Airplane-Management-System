@@ -1,0 +1,105 @@
+<%- include('partials/header1') -%>
+
+    <h2 class="title">Add new trip for plane <%= plane.plane_id %></h2>
+    <form action="/Companies/<%= comp_id %>/<%= plane._id %>/createTrip" method="POST">                               
+        <div class="input-group">
+            <label class="label">Departure from <i class="fas fa-plane-departure" aria-hidden="true"></i></label>
+            <select name="departure" class="form-control form-control-lg" style="height: 54px; padding-left: 230px; font-size: larger;">
+                <option>Mumbai</option>
+                <option>New Delhi</option>
+                <option>Kolkata</option>
+                <option>Pune</option>
+                <option>Hyderabad</option>
+                <option>Bangalore</option>
+                <option>Chennai</option>
+                <option>Jaipur</option>
+                <option>Lucknow</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label class="label">Destination <i class="fas fa-plane-arrival"></i></label>
+            <select name="destination" class="form-control form-control-lg" style="height: 54px; padding-left: 230px; font-size: larger;">
+                <option>New Delhi</option>
+                <option>Mumbai</option>
+                <option>Kolkata</option>
+                <option>Pune</option>
+                <option>Hyderabad</option>
+                <option>Bangalore</option>
+                <option>Chennai</option>
+                <option>Jaipur</option>
+                <option>Lucknow</option>
+            </select>
+        </div>
+        <div class="row row-space">
+            <div class="input-group" style="float: left; width: 45%;">
+                <label class="label"><i class="fa fa-calendar"></i> Leaving Date  <i class="fa fa-calendar"></i></label>
+                <input class="input--style-4" type="text" name="leavingDate"  />
+            </div>
+            <div class="input-group" style="float: right; width: 45%;">
+                <label class="label">Leaving Time</label>
+                <input class="input--style-4" type="time" name="leavingTime"  />
+            </div>
+        </div>
+        <div class="row row-space">
+            <div class="input-group" style="float: left; width: 45%;">
+                <label class="label"><i class="fa fa-calendar"></i> Arrival Date  <i class="fa fa-calendar"></i></label>
+                <input class="input--style-4" type="text" name="arrivalDate"  >
+            </div>
+            <div class="input-group" style="float: right; width: 45%;">
+                <label class="label">Arriving Time</label>
+                <input class="input--style-4" type="time" name="arrivalTime"  />
+            </div>
+        </div>
+        <div class="input-group">
+            <label class="label">Cost for Economy Class</label>
+            <input class="input--style-4" type="text" name="Economy"  >
+        </div>
+        <div class="input-group">
+            <label class="label">Cost for Business Class</label>
+            <input class="input--style-4" type="text" name="Business"  >
+        </div>
+        <div class="p-t-15">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+        </div>
+    </form>
+    <br><br>
+
+    <a href="/Companies/<%= comp_id %>/<%= plane._id %>" class="btn btn-lg btn-warning">Back</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/locale/nl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script>
+
+$(function () {
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
+        });
+        $('#datetimepicker3');
+        });
+        $(document).ready(function(){
+        var date_Arrival=$('input[name="arrivalDate"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_Arrival.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        });
+        var date_Leaving =$('input[name="leavingDate"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_Leaving.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+        })
+    </script>
+<%- include('partials/footer1') -%>

@@ -1,0 +1,23 @@
+<%- include('partials/header1') -%>
+
+    <h2 class="title">Company Form</h2>
+    <form action="/Companies/createCompany" method="POST">   
+        <div class="input-group">
+            <label class="label">Airline Name</label>
+            <input class="input--style-4" type="text" name="name" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
+        </div>                            
+        <div class="input-group">
+            <label class="label">Logo Link</label>
+            <input class="input--style-4" type="text" name="logo" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
+        </div>
+        <div class="p-t-15">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+        </div>
+    </form>
+    <br><br><br><br><br>
+
+    <a href="/Companies" class="btn btn-lg btn-warning">Back</a>
+    
+<%- include('partials/footer1') -%>
+
+                    
