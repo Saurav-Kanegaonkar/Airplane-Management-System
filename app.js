@@ -109,18 +109,24 @@ app.get("/landing", function(req,res){
 app.post("/landing", function(req,res){
     if(req.body.trip == "oneWay"){
         if(req.body.departure && req.body.destination && req.body.leavingDate){
-            Trip.find({departure: req.body.departure , destination: req.body.destination, leavingDate: req.body.leavingDate}, function(err, foundtrips){
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    res.render("results", {foundtrips: foundtrips});
-                }
-            });
+            if(req.body.departure != req.body.destination){
+                Trip.find({departure: req.body.departure , destination: req.body.destination, leavingDate: req.body.leavingDate}, function(err, foundtrips){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.render("results", {foundtrips: foundtrips});
+                    }
+                });
+            }
+            else{
+                req.flash("error", "Departure and Destination can not be same");
+                res.redirect("/landing");
+            }
         }
         else{
-            req.flash("error", "Please Fill out the form completely");
-            res.redirect("/landing")
+            req.flash("error", "Please fill out the form properly");
+            res.redirect("/landing");
         }
     }
     else{

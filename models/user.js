@@ -26,12 +26,12 @@ var userSchema = new mongoose.Schema({
     mobile    : String,
     ticketsPurchased : 
     {
-        datePurchase: Date,
+        datePurchase: String,
         count: Number,
         ticketInfo:{
             id: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Passenger"
+                ref: "Ticket"
                 }, 
         },
         ticketNumber: String,
