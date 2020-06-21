@@ -1,29 +1,66 @@
 <%- include('partials/header') -%>
 
+<div class="container" style="text-align: center; padding-top: 5px; ">
+	<h2 style="color: black;">Results for your flight!!</h2>
+	<div class="card">
+					<div class="row">
+						<div class="col-sm-2" style="padding-bottom: 5px; padding-top: 5px;">
+							<h3>Name</h3>
+						</div>
+						<div class="col-sm-1" style="padding-bottom: 5px; padding-top: 5px;">Plane ID
+						</div>
+						<div class="col-sm-2">
+							<div >
+								<h4>To-From</h4>
+							</div>
+						</div>
+						<div class="col-sm-4" style="padding-bottom: 5px; padding-top: 5px;">
+							<div class="col-sm-6" >
+								<h4>Leaves at:</h4>
+							</div>
+							<div class="col-sm-6" >
+								<h4>Arrives at:</h4>
+							</div>
+						</div>
+						<div class="col-sm-3" style="padding-bottom: 5px; padding-top: 5px;">
+							<div style="text-align: center;">
+								<h4>Kharcha</h4>
+							</div>
+						</div>
+					</div>
+				</div>
 
-
-<div class="container">
-    <h2 style="color: black;">Results for your flight!!</h2>
-    <% foundtrips.forEach(function(a){ %>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="image">
-                <div><%= a.plane.plane_id %></div>
-                <img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 20px; padding-left: 10px;"><br>
-              </div>
-              <div class="card-inner">
-                <div class="header">
-                  <h3><%= a.departure %> To <%= a.destination %></h2><br>
-                  <h3>Economy: <i class="fas fa-rupee-sign"></i> <%= a.cost.Economy %></h3>
-              </div>
-              <div class="content" style="color: indianred; border: 1px solid lightcoral; padding-top: 5px;"> 
-                <p>Leaving Date: <%= a.leavingDate %> at <%= a.leavingTime %> hrs</p>
-                <p>Arrival Date: <%= a.arrivalDate %> at <%= a.arrivalTime %> hrs</p>
-              </div>
-                </div>
-            </div>
-        </div>
-    <% }); %>
-</div>
+	<%foundtrips.forEach(function(a){ %>
+		<!-- <div class="col-sm-12"> -->
+			<div class="card">
+				<div class="row">
+					<div class="col-sm-2">
+						<img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 10px; padding-right: 5px; padding-left: 5px; padding-bottom: 10px; ">
+					</div>
+					<div class="col-sm-1" style="padding-top: 40px; padding-left: 5px; padding-right: 5px; padding-bottom: 40px; text-align: center;">
+						<%= a.plane.plane_id %>
+					</div>
+					<div class="col-sm-2">
+						<div style="padding-top: 20px; padding-bottom: 20px; ">
+							<h4><%= a.departure %>-<br><%= a.destination %></h4>
+						</div>
+					</div>
+					<div class="col-sm-4" style="text-align: center; padding-top: 30px;">
+						<div class="col-sm-6">
+							<h4><%= a.leavingDate %> <%= a.leavingTime %></h4>
+						</div>
+						<div class="col-sm-6">
+							<h4><%= a.arrivalDate %> <%= a.arrivalTime %></h4>
+						</div>
+					</div>
+					<div class="col-sm-3" style="float: right; padding-top: 30px; padding-left: 30px; ">
+						<div class="row align-items-center" style="text-align: center;">
+							<h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% }); %>
+	</div></div>
 
 <%- include('partials/footer') -%>
