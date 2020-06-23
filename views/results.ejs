@@ -1,41 +1,46 @@
 <%- include('partials/header') -%>
 
-<div class="container" style="text-align: center; padding-top: 5px; ">
+	<style>
+		.tablecolour {
+			background-color: #f7f7f7
+		}
+		.tableheader{
+			font-family: 'Oswald', sans-serif;
+		}
+	</style>
+<div class="container" style="text-align: center; padding-top: 5px;">
 	<h2 style="color: black;">Results for your flight!!</h2>
-	<div class="card">
-					<div class="row">
-						<div class="col-sm-2" style="padding-bottom: 5px; padding-top: 5px;">
-							<h3>Name</h3>
-						</div>
-						<div class="col-sm-1" style="padding-bottom: 5px; padding-top: 5px;">Plane ID
-						</div>
-						<div class="col-sm-2">
-							<div >
-								<h4>To-From</h4>
-							</div>
-						</div>
-						<div class="col-sm-4" style="padding-bottom: 5px; padding-top: 5px;">
-							<div class="col-sm-6" >
-								<h4>Leaves at:</h4>
-							</div>
-							<div class="col-sm-6" >
-								<h4>Arrives at:</h4>
-							</div>
-						</div>
-						<div class="col-sm-3" style="padding-bottom: 5px; padding-top: 5px;">
-							<div style="text-align: center;">
-								<h4>Kharcha</h4>
-							</div>
-						</div>
+
+			<div class="row tablecolour row-top">
+				<div class="col-sm-2 " style="padding-bottom: 5px; padding-top: 5px; padding-right: 30px;">
+					<h4>Name</h4>
+				</div>
+				<div class="col-sm-1 " style=" padding-top: 10px;">Plane ID
+				</div>
+				<div class="col-sm-2 " style="padding-top: 5px;">
+						<h4>To-From</h4>
+				</div>
+				<div class="col-sm-4 " style="padding-bottom: 5px; padding-top: 5px;">
+					<div class="col-sm-6 " >
+						<h4>Leaves at:</h4>
+					</div>
+					<div class="col-sm-6 " >
+						<h4>Arrives at:</h4>
 					</div>
 				</div>
+				<div class="col-sm-3 " style="padding-bottom: 5px; padding-top: 5px;">
+					<div style="text-align: center;">
+						<h4>Kharcha</h4>
+					</div>
+				</div>
+			</div>
 
 	<%foundtrips.forEach(function(a){ %>
-		<!-- <div class="col-sm-12"> -->
-			<div class="card">
-				<div class="row">
+		<!-- <div > -->
+
+				<div class="row tablecolour">
 					<div class="col-sm-2">
-						<img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 10px; padding-right: 5px; padding-left: 5px; padding-bottom: 10px; ">
+						<img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 20px; padding-right: 5px; padding-left: 10px; ">
 					</div>
 					<div class="col-sm-1" style="padding-top: 40px; padding-left: 5px; padding-right: 5px; padding-bottom: 40px; text-align: center;">
 						<%= a.plane.plane_id %>
@@ -54,13 +59,13 @@
 						</div>
 					</div>
 					<div class="col-sm-3" style="float: right; padding-top: 30px; padding-left: 30px; ">
-						<div class="row align-items-center" style="text-align: center;">
+						<div class="align-items-center" style="text-align: center;">
 							<h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
 						</div>
 					</div>
 				</div>
-			</div>
+			<!-- </div> -->
 		<% }); %>
-	</div></div>
+	</div>
 
 <%- include('partials/footer') -%>
