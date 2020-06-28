@@ -99,11 +99,25 @@ app.use(function(req, res, next){
 // =========================
 
 app.get("/", function(req,res){
-	res.render("landing");
+	Company.find(function(err, foundcomp){
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.render("landing", {foundcomp: foundcomp})
+		}
+	})
 });
 
 app.get("/landing", function(req,res){
-	res.render("landing");
+	Company.find(function(err, foundcomp){
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.render("landing", {foundcomp: foundcomp})
+		}
+	})
 });
 
 app.post("/landing", function(req,res){
@@ -490,7 +504,23 @@ app.put("/profile/edit", function(req,res){
 	}
 });
 
-
+app.get("/:Company", function(req,res){
+	Company.find({companyName: req.params.Company},function(err, foundcomp){
+		if(err){
+			console.log(err);
+		}
+		else{
+			Trip.find({"company.id": foundcomp[0].id},function(err, foundtrip){
+				if(err){
+					console.log(err);
+				}
+				else{
+					res.render("Company", {foundtrip: foundtrip, compName: foundcomp[0].companyName});
+				}
+			});
+		}
+	});
+});
 
 // =========================
 // Middlewares

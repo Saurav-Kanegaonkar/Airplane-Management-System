@@ -1,4 +1,13 @@
 <%- include('partials/header1') -%>
+    <style>
+        img{
+            border-radius: 4px;
+            padding: 5px;
+            width: 100px;
+        }
+    </style>
+
+
             <form action="/landing" method="POST">
                 <div class="input-group">
                     <label class="label"><h2>Search your trip</h2></label>
@@ -53,7 +62,7 @@
                     <div class="col-3">
                         <div class="input-group">
                             <label class="label"> Arrival Date  <i class="fa fa-calendar"></i></label>
-                            <input id="arrival" class="input--style-4" type="text" disabled value="Disabled" name="arrivalDate" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
+                            <input id="arrival" class="input--style-4" type="text" disabled placeholder="Disabled" name="arrivalDate" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
                         </div>
                     </div>
                 </div>
@@ -65,6 +74,13 @@
         </div>
     </div>
 </div>
+
+    <div>
+        <% foundcomp.forEach(function(a){ %> 
+            <a href="/<%= a.companyName %>"><img src="<%= a.logo %>"></a>
+        <% }); %>
+    </div>
+    <br><br>
     <p>Want to go to the company page?
     </p>
     <a class="btn btn-default btn-info" href="/Companies">Click Here</a>

@@ -1,0 +1,244 @@
+<%- include('partials/header') -%>
+
+<style>
+    .this{
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 100px;
+    }
+    label{
+        font-family: 'Oswald', sans-serif;
+        color: black;
+        font-size: larger;
+    }
+    option{
+        background-color: lightblue;
+        padding: 15px;
+    }
+    select{
+        padding: 15px;
+        text-align: center;
+        font-size: larger;
+        background-color: transparent;
+        color: black;
+        border: none;
+        outline: none;
+    }
+</style>
+
+<label for="Result of search">Choose a filter:</label>
+<select name="sort" id="sort" onclick="yekar()">
+    <option disabled selected>-- select sorting --</option>
+    <option value="l2h" >Price: Low to High</option>
+    <option value="h2l">Price: High to Low</option>
+    <option value="et">Earliest Time</option>
+    <option value="ed">Earliest Dates</option>
+</select>
+
+<div id="L2H">
+    <% function compare1( a, b ) { %>
+        <% if ( a.cost.Economy < b.cost.Economy ){ %>
+        <%	return -1; %>
+        <% } if ( a.cost.Economy > b.cost.Economy ){ %>
+        <%	return 1; %>
+        <% } %>
+        <% return 0; %>
+    <% } %>
+
+    <% var x = foundtrip %>
+    <% x.sort(compare1) %>
+
+    <div class="row1 text-center this" style="display: flex; flex-wrap: wrap;">
+        <% x.forEach(function(a){ %>
+            <div class="col-md-3 col col-sm-6" >
+                <div class="card">
+                    <h2><%= compName %></h2>
+                    <div class="image">
+                        <img src="<%= a.company.logo %>" >
+                    </div>
+                    <div class="card-inner">
+                        <div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
+                            <h3><%= a.departure %>-<%= a.destination %></h3>
+                        </div>
+                        <div>
+                            <h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+                        </div>
+                        <div style="border: 1px solid black; ">
+                            Timings: 
+                            <br>
+                            <h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
+                            <h4>Arrival on <%= a.leavingTime %>, <%= a.leavingDate %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        <% }); %>
+    </div>
+</div>
+
+<div id="H2L">
+    <% function compare1( a, b ) { %>
+        <% if ( a.cost.Economy < b.cost.Economy ){ %>
+        <%	return -1; %>
+        <% } if ( a.cost.Economy > b.cost.Economy ){ %>
+        <%	return 1; %>
+        <% } %>
+        <% return 0; %>
+    <% } %>
+
+    <% var x = foundtrip %>
+    <% x.sort(compare1) %>
+    <% x.reverse(); %>
+
+    <div class="row1 text-center this" style="display: flex; flex-wrap: wrap;">
+        <% x.forEach(function(a){ %>
+            <div class="col-md-3 col col-sm-6" >
+                <div class="card">
+                    <h2><%= compName %></h2>
+                    <div class="image">
+                        <img src="<%= a.company.logo %>" >
+                    </div>
+                    <div class="card-inner">
+                        <div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
+                            <h3><%= a.departure %>-<%= a.destination %></h3>
+                        </div>
+                        <div>
+                            <h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+                        </div>
+                        <div style="border: 1px solid black; ">
+                            Timings: 
+                            <br>
+                            <h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
+                            <h4>Arrival on <%= a.leavingTime %>, <%= a.leavingDate %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        <% }); %>
+    </div>
+</div>
+
+<div id="ET">
+    <% function dynamicSort(property){ %>
+        <% var sortOrder = 1; %>
+        <% if(property[0] === "-") { %>
+        <% sortOrder = -1; %>
+        <% property = property.substr(1); %>
+        <% }return function (a,b) {  %>
+        <% var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0; %>
+        <% return result * sortOrder; %>
+        <% } %>
+    <% } %>
+
+    <% var x = foundtrip %>
+    <% x.sort(dynamicSort("leavingTime")) %>
+
+    <div class="row1 text-center this" style="display: flex; flex-wrap: wrap;">
+        <% x.forEach(function(a){ %>
+            <div class="col-md-3 col col-sm-6" >
+                <div class="card">
+                    <h2><%= compName %></h2>
+                    <div class="image">
+                        <img src="<%= a.company.logo %>" >
+                    </div>
+                    <div class="card-inner">
+                        <div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
+                            <h3><%= a.departure %>-<%= a.destination %></h3>
+                        </div>
+                        <div>
+                            <h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+                        </div>
+                        <div style="border: 1px solid black; ">
+                            Timings: 
+                            <br>
+                            <h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
+                            <h4>Arrival on <%= a.leavingTime %>, <%= a.leavingDate %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        <% }); %>
+    </div>
+</div>
+
+<div id="ED">
+    <% function compare2( a, b ) { %>
+        <% if ( a.arrivalDate < b.arrivalDate ){ %>
+        <%	return -1; %>
+        <% } if ( a.arrivalDate > b.arrivalDate ){ %>
+        <%	return 1; %>
+        <% } %>
+        <% return 0; %>
+    <% } %>
+
+    <% var x = foundtrip %>
+    <% x.sort(compare2) %>
+
+    <div class="row1 text-center this" style="display: flex; flex-wrap: wrap;">
+        <% x.forEach(function(a){ %>
+            <div class="col-md-3 col col-sm-6" >
+                <div class="card">
+                    <h2><%= compName %></h2>
+                    <div class="image">
+                        <img src="<%= a.company.logo %>" >
+                    </div>
+                    <div class="card-inner">
+                        <div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
+                            <h3><%= a.departure %>-<%= a.destination %></h3>
+                        </div>
+                        <div>
+                            <h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+                        </div>
+                        <div style="border: 1px solid black; ">
+                            Timings: 
+                            <br>
+                            <h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
+                            <h4>Arrival on <%= a.leavingTime %>, <%= a.leavingDate %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        <% }); %>
+    </div>
+</div>
+
+
+
+<script>
+    document.getElementById("H2L").style.display= "none";
+    document.getElementById("ET").style.display= "none";
+    document.getElementById("ED").style.display= "none";
+
+    function yekar()
+    {
+        var x = document.getElementById("sort").value;
+        if(x =="l2h")
+        {
+            document.getElementById("L2H").style.display= "block";
+            document.getElementById("H2L").style.display= "none";
+            document.getElementById("ET").style.display= "none";
+            document.getElementById("ED").style.display= "none";
+        }
+        else if(x == "h2l")
+        {
+            document.getElementById("H2L").style.display= "block";
+            document.getElementById("L2H").style.display= "none";
+            document.getElementById("ET").style.display= "none";
+            document.getElementById("ED").style.display= "none";
+        }
+        else if(x == "et")
+        {
+            document.getElementById("ET").style.display= "block";
+            document.getElementById("L2H").style.display= "none";
+            document.getElementById("H2L").style.display= "none";
+            document.getElementById("ED").style.display= "none";
+        }
+        else{
+            document.getElementById("ED").style.display= "block";
+            document.getElementById("L2H").style.display= "none";
+            document.getElementById("H2L").style.display= "none";
+            document.getElementById("ET").style.display= "none";
+        }
+    }
+</script>
+<%- include('partials/footer') -%>
