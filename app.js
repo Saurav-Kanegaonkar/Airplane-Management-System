@@ -14,6 +14,10 @@ var express        = require("express"),
 	util           = require("util"), 
 	Company        = require("./models/company");
 
+const morgan = require('morgan')
+const dotenv = require('dotenv')
+
+
 // passport       = require("passport"),
 // googleAuth     = require("passport-google-oauth"),
 // LocalStrategy  = require("passport-local"),
@@ -276,12 +280,25 @@ app.get("/logout", function(req, res){
 // =====================================
 
 app.get("/Companies", function(req,res){
-	Company.find({}, function(err, comp){
+	Company.find({companyName: req.params.Company},function(err, foundcomp){
 		if(err){
 			console.log(err);
 		}
 		else{
-			res.render("companies", {comp:comp});
+			if(foundcomp.length == 0){
+				res.redirect("/landing");
+			}
+			else{
+				console.log(foundcomp)
+				Trip.find({"company.id": foundcomp[0].id},function(err, foundtrip){
+					if(err){
+						console.log(err);
+					}
+					else{
+						res.render("Company", {foundtrip: foundtrip, compName: foundcomp[0].companyName});
+					}
+				});
+			}
 		}
 	});
 });
@@ -554,7 +571,23 @@ function isLoggedIn(req, res, next) {
 // =========================
 // App running
 // =========================
-app.listen(4000, function(){
-	console.log("App running on port 4000");
-});
+
+// app.listen(4000, function(){
+// 	console.log("App running on port 4000");
+// });
+
+
+dotenv .config({ path: './config/config.env'})
+
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'))
+}
+
+const PORT = process.env.PORT || 4000
+
+app.listen(
+	PORT, 
+	console.log(`\nServer running in ${process.env.NODE_ENV} mode on ${PORT}\n`))
+
+
 
