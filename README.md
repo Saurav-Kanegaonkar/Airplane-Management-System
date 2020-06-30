@@ -1,4 +1,4 @@
-# WildlifeSanctuary
+# Airplane Management System
 * One stop destination for all your air-travel bookiing needs
 * Project status: working/prototype
 
