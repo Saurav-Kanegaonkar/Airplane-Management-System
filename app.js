@@ -510,14 +510,20 @@ app.get("/:Company", function(req,res){
 			console.log(err);
 		}
 		else{
-			Trip.find({"company.id": foundcomp[0].id},function(err, foundtrip){
-				if(err){
-					console.log(err);
-				}
-				else{
-					res.render("Company", {foundtrip: foundtrip, compName: foundcomp[0].companyName});
-				}
-			});
+			if(foundcomp.length == 0){
+				res.redirect("/landing");
+			}
+			else{
+				console.log(foundcomp)
+				Trip.find({"company.id": foundcomp[0].id},function(err, foundtrip){
+					if(err){
+						console.log(err);
+					}
+					else{
+						res.render("Company", {foundtrip: foundtrip, compName: foundcomp[0].companyName});
+					}
+				});
+			}
 		}
 	});
 });
