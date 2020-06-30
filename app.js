@@ -531,7 +531,6 @@ app.get("/:Company", function(req,res){
 				res.redirect("/landing");
 			}
 			else{
-				console.log(foundcomp)
 				Trip.find({"company.id": foundcomp[0].id},function(err, foundtrip){
 					if(err){
 						console.log(err);

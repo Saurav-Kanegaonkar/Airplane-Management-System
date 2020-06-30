@@ -51,12 +51,7 @@
         border-radius: 10px;
         font-weight: 500;
         }
-        .card .image{
-            border-radius: 4px;
-            padding: 5px;
-            width: 100px;
-            float: left;
-        }
+        
 
         .card:hover {
         box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
