@@ -1,35 +1,33 @@
 <%- include('partials/header') -%>
 
 <div class="container">
-    <header class="jumbotron">
-        <div class="container">
-            <h2>Companies!!</h2>
-            <p>All airlines can be seen here!!</p>
-            <p>
-                <a href="/Companies/createCompany" class="btn btn-primary btn-large">Add New Company Data</a>
-            </p>
-        </div>
-    </header>
-    
-    <div class="text-center" style="display: flex; flex-wrap: wrap;">
-        <% comp.forEach(function(a){ %>
-            <div class="col-md-3 col-sm-6" >
-                <div class="cardsansrow" style="background-color: dimgrey; ">
-                    <div class="image">
-                        <img class="card-img-top" style="padding-top: 20px; height: 190px;" src="<%= a.logo %>">
-                    </div>
-                    <div class="card-inner">
-                        <div class="header">
-                            <h3 style="color: black;" class="card-title"><strong><%= a.companyName %></strong></h3><br>
-                            <a href="/Companies/<%= a._id %>" class="btn btn-lg btn-primary">More Info</a><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                
-        <% }); %>
-        
-    </div>
+	<header class="jumbotron">
+		<div class="container">
+			<h2>Companies!!</h2>
+			<p>All airlines can be seen here!!</p>
+			<p>
+				<a href="/Companies/createCompany" class="btn btn-primary btn-large">Add New Company Data</a>
+			</p>
+		</div>
+	</header>
+	<div class="text-center" style="display: flex; flex-wrap: wrap;">
+		<% comp.forEach(function(a){ %>
+			<div class="col-md-3 col-sm-6" >
+				<div class="cardsansrow" style="background-color: dimgrey; ">
+					<div class="image">
+						<img class="card-img-top" style="padding-top: 20px; height: 190px;" src="<%= a.logo %>">
+					</div>
+					<div class="card-inner">
+						<div class="header">
+							<h3 style="color: black;" class="card-title"><strong><%= a.companyName %></strong></h3><br>
+							<a href="/Companies/<%= a._id %>" class="btn btn-lg btn-primary">More Info</a><br>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+		<% }); %>
+	</div>
 </div>
 
 <%- include('partials/footer') -%>

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+	<head>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Airline System</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Airline System</title>
 		
-        <!-- CSS -->        
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
+		<!-- CSS -->        
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
 		<link rel="stylesheet" href="/bootstrap.min.css">
 		<link rel="stylesheet" href="/app.css">
-        <link rel="stylesheet" href="/animate.css">
+		<link rel="stylesheet" href="/animate.css">
 		<link rel="stylesheet" href="/style.css">
 		<script src="https://kit.fontawesome.com/caacf6ad33.js" crossorigin="anonymous"></script>
-    </head>
+	</head>
 
-    <body>
+	<body>
 		
 		<!-- Top menu -->
 		<nav class="navbar navbar-inverse" role="navigation" style="padding-right: 20px; padding-left: 20px;">
@@ -40,14 +40,15 @@
 				</div>
 		</nav>
 		<div class="container">
-            <% if(error && error.length>0 ){ %>
-                <div class="alert alert-danger" role="alert">
-                    <h3><%= error %></h3>
-                </div>
-            <% } %>
-            <% if(success && success.length>0 ){ %>
-                <div class="alert alert-success" role="alert">
-                    <h3><%= success %></h3>
-                </div>
-            <% } %>
-        </div>
+			<% if(error && error.length>0 ){ %>
+				<div class="alert alert-danger" role="alert">
+					<h3><%= error %></h3>
+				</div>
+			<% } %>
+			<% if(success && success.length>0 ){ %>
+				<div class="alert alert-success" role="alert">
+					<h3><%= success %></h3>
+				</div>
+			<% } %>
+		</div>
+
