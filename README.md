@@ -20,7 +20,7 @@ Run the project in development mode:
 
     npm run dev
 
-Open [http://localhost:3000](http://localhost:4000) to view it in the browser.
+Open [http://localhost:4000](http://localhost:4000) to view it in the browser.
 
 The page will reload whenever you make edits.<br />
 You will also see any lint errors in the console.
