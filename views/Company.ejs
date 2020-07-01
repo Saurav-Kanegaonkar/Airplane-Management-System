@@ -6,6 +6,10 @@
 		padding-right: 50px;
 		padding-top: 20px;
 	}
+	.card{
+		background-color: lightgray;
+		border: 3px solid black;
+	}
 	label{
 		font-family: 'Oswald', sans-serif;
 		color: black;
@@ -34,6 +38,14 @@
 		padding: 5px;
 		width: 100px;
 		float: left;
+		padding-top: 10px;
+		padding-left: 10px;
+	}
+	h4{
+		color: rgb(55, 47, 105);
+	}
+	h3{
+		color: black;
 	}
 
 </style>
@@ -75,10 +87,10 @@
 						<div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
 							<h3><%= a.departure %>-<%= a.destination %></h3>
 						</div>
-						<div>
+						<div style="text-align: left;">
 							<h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
 						</div>
-						<div style="border: 1px solid black; ">
+						<div style="border: 3px dashed black; color: darkslateblue;">
 							Timings: 
 							<br>
 							<h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
@@ -116,10 +128,10 @@
 						<div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
 							<h3><%= a.departure %>-<%= a.destination %></h3>
 						</div>
-						<div>
+						<div style="text-align: left;">
 							<h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
 						</div>
-						<div style="border: 1px solid black; ">
+						<div style="border: 3px dashed black; ">
 							Timings: 
 							<br>
 							<h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
@@ -158,10 +170,10 @@
 						<div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
 							<h3><%= a.departure %>-<%= a.destination %></h3>
 						</div>
-						<div>
+						<div style="text-align: left;">
 							<h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
 						</div>
-						<div style="border: 1px solid black; ">
+						<div style="border: 3px dashed black; ">
 							Timings: 
 							<br>
 							<h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>
@@ -198,10 +210,10 @@
 						<div class="header" style="padding-top: 20px; padding-bottom: 20px; ">
 							<h3><%= a.departure %>-<%= a.destination %></h3>
 						</div>
-						<div>
+						<div style="text-align: left;">
 							<h3>Cost: <i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
 						</div>
-						<div style="border: 1px solid black; ">
+						<div style="border: 3px dashed black; ">
 							Timings: 
 							<br>
 							<h4>Departure on <%= a.arrivalTime %>,  <%= a.arrivalDate %></h4>

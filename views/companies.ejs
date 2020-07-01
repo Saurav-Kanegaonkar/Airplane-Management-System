@@ -13,13 +13,13 @@
 	<div class="text-center" style="display: flex; flex-wrap: wrap;">
 		<% comp.forEach(function(a){ %>
 			<div class="col-md-3 col-sm-6" >
-				<div class="cardsansrow" style="background-color: dimgrey; ">
+				<div class="cardsansrow" style="background-color: lightgray; border: 3px solid black; ">
 					<div class="image">
 						<img class="card-img-top" style="padding-top: 20px; height: 190px;" src="<%= a.logo %>">
 					</div>
 					<div class="card-inner">
 						<div class="header">
-							<h3 style="color: black;" class="card-title"><strong><%= a.companyName %></strong></h3><br>
+							<h3 style="color: black; font-family: 'Dancing Script', cursive;" class="card-title"><strong><%= a.companyName %></strong></h3><br>
 							<a href="/Companies/<%= a._id %>" class="btn btn-lg btn-primary">More Info</a><br>
 						</div>
 					</div>

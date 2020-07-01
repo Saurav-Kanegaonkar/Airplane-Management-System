@@ -280,27 +280,14 @@ app.get("/logout", function(req, res){
 // =====================================
 
 app.get("/Companies", function(req,res){
-	Company.find({companyName: req.params.Company},function(err, foundcomp){
-		if(err){
-			console.log(err);
-		}
-		else{
-			if(foundcomp.length == 0){
-				res.redirect("/landing");
-			}
-			else{
-				console.log(foundcomp)
-				Trip.find({"company.id": foundcomp[0].id},function(err, foundtrip){
-					if(err){
-						console.log(err);
-					}
-					else{
-						res.render("Company", {foundtrip: foundtrip, compName: foundcomp[0].companyName});
-					}
-				});
-			}
-		}
-	});
+    Company.find({}, function(err, comp){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.render("companies", {comp:comp});
+        }
+    });
 });
 
 app.get("/Companies/createCompany", isLoggedIn, function(req,res){
@@ -592,7 +579,7 @@ const PORT = process.env.PORT || 4000
 
 app.listen(
 	PORT, 
-	console.log(`\nServer running in ${process.env.NODE_ENV} mode on ${PORT}\n`))
+	console.log(`\nServer running in ${process.env.NODE_ENV} mode on ${PORT}\n`));
 
 
 
