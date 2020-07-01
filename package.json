@@ -19,6 +19,7 @@
 		"express": "^4.17.1",
 		"express-session": "^1.17.1",
 		"flash": "^1.1.0",
+		"flexboxgrid": "^6.3.1",
 		"googleapis": "^50.0.0",
 		"jsonwebtoken": "^8.5.1",
 		"method-override": "^3.0.0",
