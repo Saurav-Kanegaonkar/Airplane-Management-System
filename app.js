@@ -149,7 +149,33 @@ app.post("/landing", function(req,res){
 		}
 	}
 	else{
-		res.render("results");
+		if(req.body.departure && req.body.destination && req.body.leavingDate && req.body.arrivalDate){
+			if(req.body.departure != req.body.destination){
+				Trip.find({departure: req.body.departure , destination: req.body.destination, leavingDate: req.body.leavingDate}, function(err, foundtrips1){
+					if(err){
+						console.log(err);
+					}
+					else{
+						Trip.find({departure: req.body.destination , destination: req.body.departure, arrivalDate: req.body.arrivalDate}, function(err, foundtrips2){
+							if(err){
+								console.log(err);
+							}
+							else{
+								res.render("results2", {foundtrips1: foundtrips1, foundtrips2:foundtrips2});
+							}
+						})
+					}
+				});
+			}
+			else{
+				req.flash("error", "Departure and Destination can not be same");
+				res.redirect("/landing");
+			}
+		}
+		else{
+			req.flash("error", "Please fill out the form properly");
+			res.redirect("/landing");
+		}
 	}
 });
 
