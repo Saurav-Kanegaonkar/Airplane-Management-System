@@ -1,8 +1,115 @@
 <%- include('partials/header') -%>
 
-<p><%= foundtrips1 %></p>
+<style>
+	.first-column {
+		padding-left:5px;
+		margin: 0px;
+		padding-right:10px;
+		font-size: 2rem;
+	}
+	.second-column {
+		padding-left:10px;
+		padding-right:5px;
+	}
+</style>
 
-<br><br><br><br><br>
-<p><%= foundtrips2 %></p>
+<div class="container">
+	<div class="header">
+		<div class="col-sm-12 text-center">
+			<h1>Results...
+			</h1>
+		</div>
+	</div>
+	<div class="col-md-6 first-column">
+		<h3>
+			<% var x = foundtrips1[0] %>
+			<%= x.departure %> to <%= x.destination %>
+		</h3>
+
+		<div class="row col-xs-12 text-center" style="background-color: #f7f7f7">
+					<div class="col-xs-2 " style="padding-top: 10px; padding-bottom: 10px;">
+						<h4>Name</h4>
+					</div>
+					<div class="col-xs-7">
+						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+							<h4>Leaves at:</h4>
+						</div>
+						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+							<h4>Arrives at:</h4>
+						</div>
+					</div>
+					<div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+						<h4>Kharcha</h4>
+					</div>
+				</div>
+
+			<%foundtrips1.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+						<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+							<img src="<%= a.company.logo %>">
+						</div>
+						<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+							<div class="col-xs-6 text-center">
+								<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
+							</div>
+							<div class="col-xs-6 text-center">
+								<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
+							</div>
+						</div>
+						<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 15px;padding-bottom: 10px; padding-left: 30px;">
+								<h4><%= a.cost.Economy %></h4>
+						</div>
+					</div>
+				<% }); %>
+			</div>
+
+
+
+	<div class="col-md-6 first-column">
+		<h3>
+			<% var x = foundtrips1[0] %>
+			<%= x.destination %> to <%= x.departure %>
+		</h3>
+
+		<div class="row col-xs-12 text-center" style="background-color: #f7f7f7">
+					<div class="col-xs-2 " style="padding-top: 10px; padding-bottom: 10px;">
+						<h4>Name</h4>
+					</div>
+					<div class="col-xs-7">
+						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+							<h4>Leaves at:</h4>
+						</div>
+						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+							<h4>Arrives at:</h4>
+						</div>
+					</div>
+					<div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+						<h4>Kharcha</h4>
+					</div>
+				</div>
+
+			<%foundtrips2.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+						<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+							<img src="<%= a.company.logo %>">
+						</div>
+						<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+							<div class="col-xs-6 text-center">
+								<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
+							</div>
+							<div class="col-xs-6 text-center">
+								<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
+							</div>
+						</div>
+						<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 20px; padding-bottom: 10px; padding-left: 30px;">
+								<h4><%= a.cost.Economy %></h4>
+						</div>
+					</div>
+				<% }); %>
+			</div>
+
+
+	</div>
+</div>
 
 <%- include('partials/footer') -%>
