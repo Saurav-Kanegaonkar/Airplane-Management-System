@@ -24,27 +24,26 @@ var userSchema = new mongoose.Schema({
                 trim: true
             },
     mobile    : String,
-    ticketsPurchased : 
-    {
-        datePurchase: String,
-        count: Number,
-        ticketInfo:{
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Ticket"
-                }, 
-        },
-        ticketNumber: String,
-        class: String,
-        cost: Number,
-        ticketHolder: {
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Passenger"
-            },
-            username: String
-        }
-    }
+    ticketsPurchased : [
+        {
+          datePurchase: String,
+          ticketInfo:{
+              id: {
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: "Ticket"
+                  }, 
+          },
+          ticketNumber: String,
+          Class: String,
+          cost: String,
+          ticketHolder: {
+              fname: String,
+              lname: String,
+              age: String,
+              gender: String
+          }
+      }
+    ]
 });
 
 userSchema.statics.authenticate = function (email, password, callback) {

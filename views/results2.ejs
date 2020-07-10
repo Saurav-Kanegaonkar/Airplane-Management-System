@@ -11,105 +11,426 @@
 		padding-left:10px;
 		padding-right:5px;
 	}
+	label{
+		font-family: 'Oswald', sans-serif;
+		color: black;
+		font-size: larger;
+	}
+	option{
+		background-color: lightblue;
+		padding: 15px;
+	}
+	select{
+		padding: 15px;
+		text-align: center;
+		font-size: larger;
+		background-color: transparent;
+		color: black;
+		border: none;
+		outline: none;
+	}
 </style>
 
 <div class="container">
 	<div class="header">
 		<div class="col-sm-12 text-center">
-			<h1>Results...
+			<h1 style="color: black; font-weight: 400;">Results...
 			</h1>
+			<div id="filter">
+				<label for="Result of search">Choose a filter:</label>
+				<select name="sort" id="sort" onclick="yekar()">
+					<option disabled selected>-- select sorting --</option>
+					<option value="l2h" >Price: Low to High</option>
+					<option value="h2l">Price: High to Low</option>
+					<option value="et">Earliest Time</option>
+					<option value="ao">Alphabetical order</option>
+				</select>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-6 first-column">
-		<h3>
-			<% var x = foundtrips1[0] %>
-			<%= x.departure %> to <%= x.destination %>
+		<h3 style="color: black; font-weight: 400;">
+			<% var y = foundtrips1[0] %>
+			<%= y.departure %> to <%= y.destination %>
 		</h3>
 
 		<div class="row col-xs-12 text-center" style="background-color: #f7f7f7">
-					<div class="col-xs-2 " style="padding-top: 10px; padding-bottom: 10px;">
-						<h4>Name</h4>
+			<div class="col-xs-2 " style="padding-top: 10px; padding-bottom: 10px;">
+				<h4>Name</h4>
+			</div>
+			<div class="col-xs-7">
+				<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+					<h4>Leaves at:</h4>
+				</div>
+				<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+					<h4>Arrives at:</h4>
+				</div>
+			</div>
+			<div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+				<h4>Kharcha</h4>
+			</div>
+		</div>
+
+		<div id="L2H">
+			<% function compare1( a, b ) { %>
+				<% if ( a.cost.Economy < b.cost.Economy ){ %>
+				<%	return -1; %>
+				<% } if ( a.cost.Economy > b.cost.Economy ){ %>
+				<%	return 1; %>
+				<% } %>
+				<% return 0; %>
+				<% } %>
+
+				<% var x = foundtrips1 %>
+				<% x.sort(compare1) %>
+
+			<% x.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
 					</div>
-					<div class="col-xs-7">
-						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
-							<h4>Leaves at:</h4>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
 						</div>
-						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
-							<h4>Arrives at:</h4>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
 						</div>
 					</div>
-					<div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
-						<h4>Kharcha</h4>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 15px;padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
 					</div>
 				</div>
+			<% }); %>
+		</div>
 
-			<%foundtrips1.forEach(function(a){ %>
+		<div id="H2L">
+
+			<% function compare1( a, b ) { %>
+				<% if ( a.cost.Economy < b.cost.Economy ){ %>
+				<%	return -1; %>
+				<% } if ( a.cost.Economy > b.cost.Economy ){ %>
+				<%	return 1; %>
+				<% } %>
+				<% return 0; %>
+				<% } %>
+
+				<% var x = foundtrips1 %>
+				<% x.sort(compare1) %>
+				<% x.reverse(); %>
+
+			<% x.forEach(function(a){ %>
 				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
-						<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
-							<img src="<%= a.company.logo %>">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
+					</div>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
 						</div>
-						<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
-							<div class="col-xs-6 text-center">
-								<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
-							</div>
-							<div class="col-xs-6 text-center">
-								<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
-							</div>
-						</div>
-						<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 15px;padding-bottom: 10px; padding-left: 30px;">
-								<h4><%= a.cost.Economy %></h4>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
 						</div>
 					</div>
-				<% }); %>
-			</div>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 15px;padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+
+		<div id="ET">
+
+			<% function dynamicSort(property){ %>
+				<% var sortOrder = 1; %>
+				<% if(property[0] === "-") { %>
+				<% sortOrder = -1; %>
+				<% property = property.substr(1); %>
+				<% }return function (a,b) {  %>
+				<% var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0; %>
+				<% return result * sortOrder; %>
+				<% } %>
+				<% } %>
+
+				<% var x = foundtrips1 %>
+				<% x.sort(dynamicSort("leavingTime")) %>
+
+			<% x.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
+					</div>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
+						</div>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
+						</div>
+					</div>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 15px;padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+
+		<div id="AO">
+
+			<% function compare2( a, b ) { %>
+				<% if ( a.plane.plane_id < b.plane.plane_id ){ %>
+				<%	return -1; %>
+				<% } if ( a.plane.plane_id > b.plane.plane_id ){ %>
+				<%	return 1; %>
+				<% } %>
+				<% return 0; %>
+				<% } %>
+
+				<% var x = foundtrips1 %>
+				<% x.sort(compare2) %>
+
+			<% x.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
+					</div>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
+						</div>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
+						</div>
+					</div>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 15px;padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
 
 
 
 	<div class="col-md-6 first-column">
-		<h3>
-			<% var x = foundtrips1[0] %>
-			<%= x.destination %> to <%= x.departure %>
+		<h3 style="color: black; font-weight: 400;">
+			<% var y = foundtrips1[0] %>
+			<%= y.destination %> to <%= y.departure %>
 		</h3>
 
 		<div class="row col-xs-12 text-center" style="background-color: #f7f7f7">
-					<div class="col-xs-2 " style="padding-top: 10px; padding-bottom: 10px;">
-						<h4>Name</h4>
+			<div class="col-xs-2 " style="padding-top: 10px; padding-bottom: 10px;">
+				<h4>Name</h4>
+			</div>
+			<div class="col-xs-7">
+				<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+					<h4>Leaves at:</h4>
+				</div>
+				<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
+					<h4>Arrives at:</h4>
+				</div>
+			</div>
+			<div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+				<h4>Kharcha</h4>
+			</div>
+		</div>
+
+		<div id="L2H1">
+
+			<% function compare1( a, b ) { %>
+				<% if ( a.cost.Economy < b.cost.Economy ){ %>
+				<%	return -1; %>
+				<% } if ( a.cost.Economy > b.cost.Economy ){ %>
+				<%	return 1; %>
+				<% } %>
+				<% return 0; %>
+				<% } %>
+
+				<% var x = foundtrips2 %>
+				<% x.sort(compare1) %>
+
+			<% x.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
 					</div>
-					<div class="col-xs-7">
-						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
-							<h4>Leaves at:</h4>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
 						</div>
-						<div class="col-xs-6 " style="padding-top: 10px; padding-bottom: 10px; ">
-							<h4>Arrives at:</h4>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
 						</div>
 					</div>
-					<div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
-						<h4>Kharcha</h4>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 20px; padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
 					</div>
 				</div>
+			<% }); %>
+		</div>
 
-			<%foundtrips2.forEach(function(a){ %>
+		<div id="H2L1">
+
+			<% function compare1( a, b ) { %>
+				<% if ( a.cost.Economy < b.cost.Economy ){ %>
+				<%	return -1; %>
+				<% } if ( a.cost.Economy > b.cost.Economy ){ %>
+				<%	return 1; %>
+				<% } %>
+				<% return 0; %>
+				<% } %>
+
+				<% var x = foundtrips2 %>
+				<% x.sort(compare1) %>
+				<% x.reverse(); %>
+
+			<% x.forEach(function(a){ %>
 				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
-						<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
-							<img src="<%= a.company.logo %>">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
+					</div>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
 						</div>
-						<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
-							<div class="col-xs-6 text-center">
-								<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
-							</div>
-							<div class="col-xs-6 text-center">
-								<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
-							</div>
-						</div>
-						<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 20px; padding-bottom: 10px; padding-left: 30px;">
-								<h4><%= a.cost.Economy %></h4>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
 						</div>
 					</div>
-				<% }); %>
-			</div>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 20px; padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
+					</div>
+				</div>
+			<% }); %>
+		</div>
 
+		<div id="ET1">
 
+			<% function dynamicSort(property){ %>
+				<% var sortOrder = 1; %>
+				<% if(property[0] === "-") { %>
+				<% sortOrder = -1; %>
+				<% property = property.substr(1); %>
+				<% }return function (a,b) {  %>
+				<% var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0; %>
+				<% return result * sortOrder; %>
+				<% } %>
+				<% } %>
+
+				<% var x = foundtrips2 %>
+				<% x.sort(dynamicSort("leavingTime")) %>
+
+			<% x.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
+					</div>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
+						</div>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
+						</div>
+					</div>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 20px; padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+
+		<div id="AO1">
+
+			<% function compare2( a, b ) { %>
+				<% if ( a.plane.plane_id < b.plane.plane_id ){ %>
+				<%	return -1; %>
+				<% } if ( a.plane.plane_id > b.plane.plane_id ){ %>
+				<%	return 1; %>
+				<% } %>
+				<% return 0; %>
+				<% } %>
+
+				<% var x = foundtrips2 %>
+				<% x.sort(compare2) %>
+
+			<% x.forEach(function(a){ %>
+				<div class="row col-xs-12 text-center tablecolour"  style="background-color: #f7f7f7">
+					<div class="col-xs-2" style="padding-top: 20px; padding-bottom: 10px">
+						<img src="<%= a.company.logo %>">
+					</div>
+					<div class="col-xs-7" style="text-align: center; padding-top: 10px;">
+						<div class="col-xs-6 text-center">
+							<h4><%= a.leavingTime %><br> <%= a.leavingDate %></h4>
+						</div>
+						<div class="col-xs-6 text-center">
+							<h4><%= a.arrivalTime %><br> <%= a.arrivalDate %></h4>
+						</div>
+					</div>
+					<div class="col-xs-3 align-items-center" style="text-align: center;float: right; padding-top: 20px; padding-bottom: 10px; padding-left: 30px;">
+							<h4 style="font-size: 22px;"><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h4>
+					</div>
+				</div>
+			<% }); %>
+		</div>
 	</div>
+
 </div>
 
+<script>
+	document.getElementById("H2L").style.display= "none";
+	document.getElementById("ET").style.display= "none";
+	document.getElementById("AO").style.display= "none";
+	document.getElementById("H2L1").style.display= "none";
+	document.getElementById("ET1").style.display= "none";
+	document.getElementById("AO1").style.display= "none";
+
+	function yekar()
+	{
+		var x = document.getElementById("sort").value;
+		if(x =="l2h")
+		{
+			document.getElementById("L2H").style.display= "block";
+			document.getElementById("H2L").style.display= "none";
+			document.getElementById("ET").style.display= "none";
+			document.getElementById("AO").style.display= "none";
+			document.getElementById("L2H1").style.display= "block";
+			document.getElementById("H2L1").style.display= "none";
+			document.getElementById("ET1").style.display= "none";
+			document.getElementById("AO1").style.display= "none";
+		}
+		else if(x == "h2l")
+		{
+			document.getElementById("H2L").style.display= "block";
+			document.getElementById("L2H").style.display= "none";
+			document.getElementById("ET").style.display= "none";
+			document.getElementById("AO").style.display= "none";
+			document.getElementById("H2L1").style.display= "block";
+			document.getElementById("L2H1").style.display= "none";
+			document.getElementById("ET1").style.display= "none";
+			document.getElementById("AO1").style.display= "none";
+		}
+		else if(x == "et")
+		{
+			document.getElementById("ET").style.display= "block";
+			document.getElementById("L2H").style.display= "none";
+			document.getElementById("H2L").style.display= "none";
+			document.getElementById("AO").style.display= "none";
+			document.getElementById("ET1").style.display= "block";
+			document.getElementById("L2H1").style.display= "none";
+			document.getElementById("H2L1").style.display= "none";
+			document.getElementById("AO1").style.display= "none";
+		}
+		else{
+			document.getElementById("AO").style.display= "block";
+			document.getElementById("L2H").style.display= "none";
+			document.getElementById("H2L").style.display= "none";
+			document.getElementById("ET").style.display= "none";
+			document.getElementById("AO1").style.display= "block";
+			document.getElementById("L2H1").style.display= "none";
+			document.getElementById("H2L1").style.display= "none";
+			document.getElementById("ET1").style.display= "none";
+		}
+	}
+</script>
 <%- include('partials/footer') -%>

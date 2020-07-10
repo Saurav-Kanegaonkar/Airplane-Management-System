@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Airplane System</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<!-- Jquery -->
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="/css/style1.css"/>
+	<script src="https://kit.fontawesome.com/caacf6ad33.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse" role="navigation" style="padding-right: 20px; padding-left: 20px; background: #444;">
+        <div class="navbar-header">
+            <a href="/"><i class="fa fa-plane" aria-hidden="true" style="font-size:40px; padding-top: 13px; padding-left: 20px; padding-top: 13px; color: #468aa8;"> Flyght</i>
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1" style="padding-top: 5px;">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/landing">Home</a></li>
+                <% if(currentUser){ %>
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="profile"><%= currentUser.username %></a></li>
+                <% } else{ %>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <% if(error && error.length>0 ){ %>
+            <div class="alert alert-danger" role="alert">
+                <h3><%= error %></h3>
+            </div>
+        <% } %>
+        <% if(success && success.length>0 ){ %>
+            <div class="alert alert-success" role="alert">
+                <h3><%= success %></h3>
+            </div>
+        <% } %>
+    </div>
+	<div class="page-content">
+		<div class="wizard-v1-content">
+			<div class="wizard-form">
+		        <form class="form-register" id="form-register" action="/landing/<%= foundtrip.id %>/OneWay?_method=PUT" method="POST">
+		        	<div id="form-total">
+		        		
+						<!-- SECTION 1 -->
+			            <h2>
+			            	<span class="step-icon"><i class="fas fa-plane"></i></span>
+			            	<span class="step-number">Step 1</span>
+                            <span class="step-text">Flight Details</span>
+			            </h2>
+			            <section>
+			                <div id="sec1">
+                                <h3 style="text-align: center; color: white;"><%= compName %></h3>    
+                                <h3><span style="padding-right: 20px; padding-left: 30px;"> Departure: <%= foundtrip.departure %></span> <i class="fas fa-plane" style="padding-left: 15px;"></i> <span style="padding-left: 20px;">Destination: <%= foundtrip.destination %></span></h3>
+                                <h3><span style="padding-right: 20px;"> Leaving Time: <%= foundtrip.leavingTime %></span> <i class="fas fa-clock"></i> <span style="padding-left: 20px;">Arrival Time: <%= foundtrip.arrivalTime %></span></h3>
+                                <h3><span style="padding-right: 20px;"> Leaving Date: <%= foundtrip.leavingDate %></span> <i class="fas fa-calendar-week"></i> <span style="padding-left: 20px;">Arrival Date: <%= foundtrip.arrivalDate %></span></h3>
+                                <div class="p-t-10" style="padding-left: 60px;">
+                                    <label class="radio-container m-r-45"><h3 style="color: white;">Economy: <i class="fas fa-rupee-sign"></i> <%= foundtrip.cost.Economy %> <i class="fas fa-coins" style="padding-left: 33px;"></i></h3> 
+                                        <input type="radio" name="trip" id="eco" value="<%= foundtrip.cost.Economy %>" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-container"><h3 style="color: white;">Business: <i class="fas fa-rupee-sign"></i> <%= foundtrip.cost.Business %></h3>
+                                        <input type="radio" name="trip" id="busi" value="<%= foundtrip.cost.Economy %>">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- SECTION 2 -->
+						<h2>
+                            <span class="step-icon"><i class="fas fa-info-circle"></i></span>
+			            	<span class="step-number">Step 2</span>
+			            	<span class="step-text">Paasenger Infomation</span>
+						</h2>
+						
+			            <section>
+                            <div>
+                                <label style="padding-left: 160px; padding-top: 15px;"> Select number of passengers:</label>
+                                <select name="nice" id="ok" onclick="ohoo()" style="font-size: large; float: left; color: white;">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <br>
+			                <div class="kyaa">
+                                <div class="inner" id="yes">
+									<h3 style="font-size: x-large;">Passenger: <span id="here">1</span> </h3> <br>
+                                    <div class="form-row">
+                                        <div class="form-holder form-holder">
+                                            <label>First Name</label>
+                                            <input type="text" placeholder="Lelouch" class="form-control fname" name="fname0" required>
+                                        </div>
+                                        <div class="form-holder form-holder">
+                                            <label>Last Name</label>
+                                            <input type="text" placeholder="Lamperouge" class="form-control lname" name="lname0" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+										<div class="input-group" style="padding-left: 20px; width: 300px;">
+											<label class="label" style="padding: 15px 15px 0px 85px; font-size: 20px;">Gender</label><br>
+											<div class="p-t-10">
+												<label class="radio-container m-r-45" style="margin-right: 12px;">Male
+													<input type="radio" name="gender0" value="Male" class="gender" checked>
+													<span class="checkmark"></span>
+												</label>
+												<label class="radio-container" style="margin-right: 12px;">Female
+													<input type="radio" name="gender0" value="Female" class="gender">
+													<span class="checkmark"></span>
+												</label>
+												<label class="radio-container" style="margin-right: 12px;">Others
+													<input type="radio" name="gender0" value="Others" class="gender">
+													<span class="checkmark"></span>
+												</label>
+											</div>
+										</div>
+										<div class="form-holder form-holder">
+                                            <label style="padding-left: 100px;">Age</label>
+                                            <input type="number" class="form-control age" placeholder="Age between 3 and 100" name="age0" min="3" max="100" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+			            </section>
+			            <!-- SECTION 3 -->
+			            <h2>
+			            	<span class="step-icon"><i class="fas fa-receipt"></i></span>
+			            	<span class="step-number">Step 3</span>
+			            	<span class="step-text">Payment Details</span>
+			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<h3 style="font-size: x-large;">Comfirm Details</h3>
+								<div class="form-row table-responsive">
+									<table class="table" id="myTable">
+										<thead>
+											<tr class="space-row">
+												<th>Passenger</th>
+												<th>First Name</th>
+												<th>Last Name</th>
+												<th>Gender</th>
+												<th>Age</th>
+											</tr>
+										</thead>
+										<tbody id="tbody">
+											
+										</tbody>
+									</table>
+								</div>
+								<h3 style="font-size: x-large;">Total cost: <i class="fas fa-rupee-sign"></i>  <span id="cost"></span></h3>
+							</div>
+							<button class="btn btn--radius-2 btn--green" type="submit" style="margin-top: 20px; font-size: x-large;">Submit</button>
+			            </section>
+		        	</div>
+		        </form>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="/js/jquery.steps.js"></script>
+	<script src="/js/main.js"></script>
+	<script type="text/javascript">
+		document.getElementById("form-register").onsubmit = function(e) {
+        e.preventDefault();
+        if(confirm('Are you sure you want to submit this form?'))
+            { 	
+                document.getElementById("form-register").onsubmit = null;
+                document.getElementById("form-register").submit();
+            }
+  		}
+		function ohoo(){
+			var yes = document.getElementById("yes"),
+			form = document.getElementsByClassName("kyaa")[0],
+			i;
+			var here = document.getElementById("here");
+			var x = document.getElementById("ok").value;
+			var x = parseInt(x,10);
+			form.innerHTML="";
+			var j =0;
+			for(i=0; i<x; i++){
+				here.innerHTML = i+1;
+				var clone = yes.cloneNode(true);
+				form.appendChild(clone);
+				var a = document.getElementsByClassName('fname').item(i);
+				var b = document.getElementsByClassName('lname').item(i);
+				var c = document.getElementsByClassName('age').item(i);
+				var ab = document.getElementsByClassName('gender').item(j);
+				var ba = document.getElementsByClassName('gender').item(j+1);
+				var ca = document.getElementsByClassName('gender').item(j+2);
+				a.name = "fname" + i;
+				b.name = "lname" + i;
+				c.name = "age" + i;
+				ab.name = "gender" + j;
+				ba.name = "gender" + j;
+				ca.name = "gender" + j;
+				j= j+3;
+			}
+			document.getElementsByClassName('gender').item(0).checked = true;			
+		}
+		
+	  </script>
+</body>
+</html>

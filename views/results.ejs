@@ -25,6 +25,14 @@
 			border: none;
 			outline: none;
 		}
+		button{
+			padding-top: 8px;
+			background-color: orange;
+			border: 3px dashed;
+			width: 130px;
+			height: 60px;
+			border-radius: 8px;
+		}
 	</style>
 	<div class="container" style="text-align: center; padding-top: 5px;">
 		<h2 style="color: black;">Results for your flight!!</h2>
@@ -96,7 +104,7 @@
 						</div>
 						<div class="col-xs-3" style="float: right; padding-top: 30px; padding-left: 30px; ">
 							<div class="align-items-center" style="text-align: center;">
-								<h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+								<button><a href="/landing/<%= a.id %>/OneWay"><h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3></a></button>
 							</div>
 						</div>
 					</div>
@@ -121,7 +129,7 @@
 
 				<% x.forEach(function(a){ %>
 
-					<div class="row tablecolour">
+					<div class="row col-xs-12 text-center tablecolour">
 						<div class="col-sm-2">
 							<img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 20px; padding-right: 5px; padding-left: 10px; ">
 						</div>
@@ -143,7 +151,7 @@
 						</div>
 						<div class="col-sm-3" style="float: right; padding-top: 30px; padding-left: 30px; ">
 							<div class="align-items-center" style="text-align: center;">
-								<h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+								<button><a href="/landing/<%= a.id %>/OneWay"><h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3></a></button>
 							</div>
 						</div>
 					</div>
@@ -167,7 +175,7 @@
 				<% x.sort(dynamicSort("leavingTime")) %>
 
 				<% x.forEach(function(a){ %>
-					<div class="row tablecolour">
+					<div class="row col-xs-12 text-center tablecolour">
 						<div class="col-sm-2">
 							<img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 20px; padding-right: 5px; padding-left: 10px; ">
 						</div>
@@ -189,7 +197,7 @@
 						</div>
 						<div class="col-sm-3" style="float: right; padding-top: 30px; padding-left: 30px; ">
 							<div class="align-items-center" style="text-align: center;">
-								<h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+								<button><a href="/landing/<%= a.id %>/OneWay"><h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3></a></button>
 							</div>
 						</div>
 					</div>
@@ -211,7 +219,7 @@
 
 				<% x.forEach(function(a){ %>
 
-					<div class="row tablecolour">
+					<div class="row col-xs-12 text-center tablecolour">
 						<div class="col-sm-2">
 							<img src="<%= a.company.logo %>" style="float: left; width: 100px; padding-top: 20px; padding-right: 5px; padding-left: 10px; ">
 						</div>
@@ -233,7 +241,7 @@
 						</div>
 						<div class="col-sm-3" style="float: right; padding-top: 30px; padding-left: 30px; ">
 							<div class="align-items-center" style="text-align: center;">
-								<h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3>
+								<button><a href="/landing/<%= a.id %>/OneWay"><h3><i class="fas fa-rupee-sign"></i><%= a.cost.Economy %></h3></a></button>
 							</div>
 						</div>
 					</div>

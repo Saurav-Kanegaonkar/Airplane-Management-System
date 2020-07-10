@@ -7,7 +7,6 @@ var express        = require("express"),
 	bcrypt         = require("bcryptjs")
 	methodOverride = require("method-override"),
 	User           = require("./models/user"),
-	Passenger      = require("./models/passenger"), 
 	Ticket         = require("./models/ticket"),
 	Plane          = require("./models/plane"),
 	Trip           = require("./models/trip"),
@@ -27,7 +26,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 app.set("view engine","ejs");
-app.use(express.static("public"));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(flash());
@@ -133,7 +132,6 @@ app.post("/landing", function(req,res){
 						console.log(err);
 					}
 					else{
-						
 						res.render("results", {foundtrips: foundtrips});
 					}
 				});
@@ -179,9 +177,6 @@ app.post("/landing", function(req,res){
 	}
 });
 
-app.get("/results", function(req,res){
-	res.render("results");
-});
 
 // =========================
 // Login, Register, Logout
@@ -505,7 +500,7 @@ app.get("/profile/edit", isLoggedIn, function(req,res){
 	res.render("editProfile");
 });
 
-app.put("/profile/edit", function(req,res){
+app.put("/profile/edit", isLoggedIn, function(req,res){
 	if(req.body.fName && req.body.lName && req.body.phone && req.body.email && req.body.gender){
 		if(onlyNumber(req.body.phone) && req.body.phone.length>9)
 			{
@@ -534,6 +529,10 @@ app.put("/profile/edit", function(req,res){
 	}
 });
 
+app.get("/history", isLoggedIn, function(req,res){
+	res.render("history", {user: req.session.user});
+});
+
 app.get("/:Company", function(req,res){
 	Company.find({companyName: req.params.Company},function(err, foundcomp){
 		if(err){
@@ -557,6 +556,92 @@ app.get("/:Company", function(req,res){
 	});
 });
 
+app.get("/landing/:tripid/OneWay", isLoggedIn, function(req,res){
+	Trip.findById(req.params.tripid, function(err, foundtrip){
+		if(err){
+			console.log(err);
+		}
+		else{
+			Company.findById(foundtrip.company.id, function(err, foundcomp){
+				res.render("booking",{foundtrip: foundtrip, compName: foundcomp.companyName});
+			});
+		}
+	});
+});	
+
+app.put("/landing/:tripid/OneWay", isLoggedIn, function(req,res){
+	Trip.findById(req.params.tripid, function(err, foundtrip){
+		if(err){
+			console.log(err);
+		}
+		else{
+			var ticketsPurchased = [];
+			var nice  = req.body.nice;
+			var  TicketHolder = [];
+			if(nice == 1){
+				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+				TicketHolder.push(passenger);
+			}
+			else if(nice == 2){
+				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+				TicketHolder.push(passenger);
+			}
+			else if(nice == 3){
+				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
+				TicketHolder.push(passenger);
+			}
+			else if(nice == 4){
+				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname3, lname: req.body.lname3, gender: req.body.gender3, age: req.body.age3};
+				TicketHolder.push(passenger);
+			}
+			else{
+				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname3, lname: req.body.lname3, gender: req.body.gender3, age: req.body.age3};
+				TicketHolder.push(passenger);
+				var passenger = {fname: req.body.fname4, lname: req.body.lname4, gender: req.body.gender4, age: req.body.age4};
+				TicketHolder.push(passenger);
+			}
+			for(var k=0; k<nice; k++){
+				var passenger_info = new Object();
+				var d = new Date();
+				passenger_info.datePurchase = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " at time " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+				passenger_info.ticketInfo = {id: req.params.tripid};
+				if(foundtrip.cost.Economy == req.body.trip)
+					passenger_info.Class = "Economy";
+				else
+					passenger_info.Class = "Business";
+				passenger_info.cost = req.body.trip;
+				passenger_info.ticketHolder = TicketHolder[k];
+				ticketsPurchased.push(passenger_info);
+			}
+			User.findByIdAndUpdate(req.session.user._id, {$push: {ticketsPurchased: ticketsPurchased}}, {safe: true, upsert: true}, function(err, doc) {
+				if(err){
+					console.log(err);
+				}else{
+					req.flash("success", "Tickets Bought");
+					res.redirect("/landing");
+				}
+			});
+		}
+	});
+});
 // =========================
 // Middlewares
 // =========================

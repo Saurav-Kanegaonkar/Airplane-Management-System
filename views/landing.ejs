@@ -8,7 +8,7 @@
     </style>
 
 
-            <form action="/landing" method="POST">
+            <form action="/landing" method="POST" >
                 <div class="input-group">
                     <label class="label"><h2>Search your trip</h2></label>
                     <div class="p-t-10">
@@ -62,12 +62,12 @@
                     <div class="col-3">
                         <div class="input-group">
                             <label class="label"> Arrival Date  <i class="fa fa-calendar"></i></label>
-                            <input id="arrival" class="input--style-4" type="text" disabled placeholder="Disabled" name="arrivalDate" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
+                            <input id="arrival" class="input--style-4" type="text" disabled name="arrivalDate" style="box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.2); text-align: center;">
                         </div>
                     </div>
                 </div>
                 <div class="p-t-15">
-                    <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                    <button class="btn btn--radius-2 btn--blue" onclick="func()" type="submit">Submit</button>
                 </div>
             </form>
             </div>
@@ -96,6 +96,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <script>
+    
+    document.getElementById("arrival").placeholder = "Disabled";
     function disableTxt() {
     document.getElementById("arrival").disabled = true;
     document.getElementById("arrival").placeholder = "Disabled";

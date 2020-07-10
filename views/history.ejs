@@ -1,0 +1,8 @@
+<%- include('partials/header1') -%>
+    <h2>Payment History</h2>
+    <p><%= user %></p>
+    <%  user.ticketsPurchased.forEach(function(a){ %>
+        <% console.log(a.datePurchase) %>
+        <p><%= a.datePurchase %> lol mounil useless, useless hai par acha aadmi bhi hai xD</p>
+    <% }); %>
+<%- include('partials/footer1') -%>
