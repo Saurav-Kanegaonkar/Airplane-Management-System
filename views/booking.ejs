@@ -13,7 +13,11 @@
 	<script src="https://kit.fontawesome.com/caacf6ad33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <nav class="navbar navbar-inverse" role="navigation" style="padding-right: 20px; padding-left: 20px; background: #444;">
@@ -71,7 +75,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                     <label class="radio-container"><h3 style="color: white;">Business: <i class="fas fa-rupee-sign"></i> <%= foundtrip.cost.Business %></h3>
-                                        <input type="radio" name="trip" id="busi" value="<%= foundtrip.cost.Economy %>">
+                                        <input type="radio" name="trip" id="busi" value="<%= foundtrip.cost.Business %>">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
