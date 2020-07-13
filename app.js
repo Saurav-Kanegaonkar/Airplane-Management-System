@@ -102,14 +102,7 @@ app.use(function(req, res, next){
 // =========================
 
 app.get("/", function(req,res){
-	Company.find(function(err, foundcomp){
-		if(err){
-			console.log(err);
-		}
-		else{
-			res.render("landing", {foundcomp: foundcomp})
-		}
-	})
+	res.render("home");
 });
 
 app.get("/landing", function(req,res){
