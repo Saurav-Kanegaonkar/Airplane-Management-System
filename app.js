@@ -293,7 +293,7 @@ app.get("/logout", function(req, res){
 // Create  Data for Companies For Admin
 // =====================================
 
-app.get("/Companies", function(req,res){
+app.get("/Companies", isAdmin, function(req,res){
     Company.find({}, function(err, comp){
         if(err){
             console.log(err);
@@ -304,11 +304,11 @@ app.get("/Companies", function(req,res){
     });
 });
 
-app.get("/Companies/createCompany", isLoggedIn, function(req,res){
+app.get("/Companies/createCompany", isAdmin, function(req,res){
 	res.render("createCompany");
 });
 
-app.post("/Companies/createCompany", isLoggedIn, function(req,res){
+app.post("/Companies/createCompany", isAdmin, function(req,res){
 	if(req.body.name && req.body.logo)
 	{
 		var companyName = req.body.name;
@@ -330,7 +330,7 @@ app.post("/Companies/createCompany", isLoggedIn, function(req,res){
 	}
 });
 
-app.get("/Companies/:id", function(req,res){
+app.get("/Companies/:id", isAdmin, function(req,res){
 
 	Company.findById(req.params.id, function(err,company){
 		if(err)
@@ -351,7 +351,7 @@ app.get("/Companies/:id", function(req,res){
 	
 });
 
-app.get("/Companies/:id/createAirplane", isLoggedIn, function(req,res){
+app.get("/Companies/:id/createAirplane", isAdmin, function(req,res){
 	Company.findById(req.params.id, function(err,company){
 		if(err)
 		{
@@ -363,7 +363,7 @@ app.get("/Companies/:id/createAirplane", isLoggedIn, function(req,res){
 	});
 });
 
-app.post("/Companies/:id/createAirplane", isLoggedIn, function(req,res){
+app.post("/Companies/:id/createAirplane", isAdmin, function(req,res){
 	if(req.body.plane_id && req.body.ticketBusiness && req.body.ticketEconomy)
 	{
 		Company.findById(req.params.id, function(err,company){
@@ -392,7 +392,7 @@ app.post("/Companies/:id/createAirplane", isLoggedIn, function(req,res){
 	}
 });
 
-app.get("/Companies/:id/:plane_id", function(req,res){
+app.get("/Companies/:id/:plane_id", isAdmin, function(req,res){
 	Company.findById(req.params.id, function(err, comp){
 		if(err){
 			console.log(err);
@@ -417,7 +417,7 @@ app.get("/Companies/:id/:plane_id", function(req,res){
 	});
 });
 
-app.get("/Companies/:id/:plane_id/createTrip", isLoggedIn, function(req,res){
+app.get("/Companies/:id/:plane_id/createTrip", isAdmin, function(req,res){
 	Plane.findById(req.params.plane_id, function(err,plane){
 		if(err){
 			console.log(err);
@@ -428,7 +428,7 @@ app.get("/Companies/:id/:plane_id/createTrip", isLoggedIn, function(req,res){
 	});
 });
 
-app.post("/Companies/:id/:plane_id/createTrip", isLoggedIn, function(req,res){
+app.post("/Companies/:id/:plane_id/createTrip", isAdmin, function(req,res){
 	if(req.body.departure && req.body.destination && req.body.leavingDate && req.body.arrivalDate && req.body.Economy && req.body.Business && req.body.arrivalTime && req.body.leavingTime){
 		if(req.body.departure != req.body.destination){
 			Company.findById(req.params.id, function(err, foundcomp){
@@ -664,6 +664,15 @@ function isLoggedIn(req, res, next) {
 	}
   }
 
+function isAdmin(req, res, next){
+	if(req.session && req.session.user && req.session.user.email == "admin@gmail.com"){
+		return next();
+	}
+	else{
+		req.flash("error", "Page not for you. LOL");
+		res.redirect("/");
+	}
+}
 // =========================
 // App running
 // =========================
