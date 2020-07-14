@@ -568,70 +568,84 @@ app.put("/landing/:tripid/OneWay", isLoggedIn, function(req,res){
 			console.log(err);
 		}
 		else{
-			var ticketsPurchased = [];
-			var nice  = req.body.nice;
-			var  TicketHolder = [];
-			if(nice == 1){
-				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
-				TicketHolder.push(passenger);
-			}
-			else if(nice == 2){
-				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
-				TicketHolder.push(passenger);
-			}
-			else if(nice == 3){
-				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
-				TicketHolder.push(passenger);
-			}
-			else if(nice == 4){
-				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname3, lname: req.body.lname3, gender: req.body.gender3, age: req.body.age3};
-				TicketHolder.push(passenger);
-			}
-			else{
-				var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname3, lname: req.body.lname3, gender: req.body.gender3, age: req.body.age3};
-				TicketHolder.push(passenger);
-				var passenger = {fname: req.body.fname4, lname: req.body.lname4, gender: req.body.gender4, age: req.body.age4};
-				TicketHolder.push(passenger);
-			}
-			for(var k=0; k<nice; k++){
-				var passenger_info = new Object();
-				var d = new Date();
-				passenger_info.datePurchase = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " at time " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-				passenger_info.ticketInfo = {id: req.params.tripid};
-				if(foundtrip.cost.Economy == req.body.trip)
-					passenger_info.Class = "Economy";
-				else
-					passenger_info.Class = "Business";
-				passenger_info.cost = req.body.trip;
-				passenger_info.ticketHolder = TicketHolder[k];
-				ticketsPurchased.push(passenger_info);
-			}
-			User.findByIdAndUpdate(req.session.user._id, {$push: {ticketsPurchased: ticketsPurchased}}, {safe: true, upsert: true}, function(err, doc) {
-				if(err){
-					console.log(err);
-				}else{
-					req.flash("success", "Tickets Bought");
-					res.redirect("/landing");
+			Company.findById(foundtrip.company.id, function(err, foundcomp){
+				var ticketsPurchased = [];
+				var nice  = req.body.nice;
+				var  TicketHolder = [];
+				if(nice == 1){
+					var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+					TicketHolder.push(passenger);
 				}
+				else if(nice == 2){
+					var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+					TicketHolder.push(passenger);
+				}
+				else if(nice == 3){
+					var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
+					TicketHolder.push(passenger);
+				}
+				else if(nice == 4){
+					var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname3, lname: req.body.lname3, gender: req.body.gender3, age: req.body.age3};
+					TicketHolder.push(passenger);
+				}
+				else{
+					var passenger = {fname: req.body.fname0, lname: req.body.lname0, gender: req.body.gender0, age: req.body.age0};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname1, lname: req.body.lname1, gender: req.body.gender1, age: req.body.age1};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname2, lname: req.body.lname2, gender: req.body.gender2, age: req.body.age2};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname3, lname: req.body.lname3, gender: req.body.gender3, age: req.body.age3};
+					TicketHolder.push(passenger);
+					var passenger = {fname: req.body.fname4, lname: req.body.lname4, gender: req.body.gender4, age: req.body.age4};
+					TicketHolder.push(passenger);
+				}
+				for(var k=0; k<nice; k++){
+					var passenger_info = new Object();
+					var d = new Date();
+					passenger_info.datePurchase = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+					passenger_info.timePurchase = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+					passenger_info.departure = foundtrip.departure;
+					passenger_info.destination = foundtrip.destination;
+					passenger_info.leavingDate = foundtrip.leavingDate;
+					passenger_info.arrivalDate = foundtrip.arrivalDate;
+					passenger_info.leavingTime = foundtrip.leavingTime;
+					passenger_info.arrivalTime = foundtrip.arrivalTime;
+					passenger_info.companyName = foundcomp.companyName;
+					passenger_info.ticketInfo = {id: req.params.tripid};
+					if(foundtrip.cost.Economy == req.body.trip){
+						passenger_info.Class = "Economy";
+					}
+					else{
+						passenger_info.Class = "Business";
+					}
+					passenger_info.cost = req.body.trip;
+					passenger_info.ticketHolder = TicketHolder[k];
+					ticketsPurchased.push(passenger_info);
+				}
+				User.findByIdAndUpdate(req.session.user._id, {$push: {ticketsPurchased: ticketsPurchased}}, {safe: true, upsert: true, new: true}, function(err, doc) {
+					if(err){
+						console.log(err);
+					}else{
+						req.session.user = doc;
+						req.flash("success", "Tickets Bought");
+						res.redirect("/landing");
+					}
+				});
 			});
+			
 		}
 	});
 });

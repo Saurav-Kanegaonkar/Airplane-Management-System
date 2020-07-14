@@ -1,8 +1,20 @@
 <%- include('partials/header1') -%>
     <h2>Payment History</h2>
-    <p><%= user %></p>
+    <% console.log(user) %>
     <%  user.ticketsPurchased.forEach(function(a){ %>
-        <% console.log(a.datePurchase) %>
-        <p><%= a.datePurchase %> lol mounil useless, useless hai par acha aadmi bhi hai xD</p>
+        <p>Date purchased: <%= a.datePurchase %></p>
+        <p>Time purchased: <%= a.timePurchase %></p>
+        <p>Company name: <%= a.companyName %></p>
+        <p>Departure: <%= a.departure %></p>
+        <p>Destination: <%= a.destination %></p>
+        <p>Leaving Date: <%= a.leavingDate %></p>
+        <p>Arrival Date: <%= a.arrivalDate %></p>
+        <p>Leaving Time: <%= a.leavingTime %></p>
+        <p>Arrival Time: <%= a.arrivalTime %></p>
+        <p>Class: <%= a.Class %></p>
+        <p>Cost: <%= a.cost %></p>
+        <p>Ticket Holder: <%= a.ticketHolder.fname %> <%= a.ticketHolder.lname %></p>
+        <p>Ticket Holder Age: <%= a.ticketHolder.age %></p>
+        <p>Ticket Holder Gender: <%= a.ticketHolder.gender %></p>
     <% }); %>
 <%- include('partials/footer1') -%>

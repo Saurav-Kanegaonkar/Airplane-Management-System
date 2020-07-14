@@ -27,6 +27,7 @@ var userSchema = new mongoose.Schema({
     ticketsPurchased : [
         {
           datePurchase: String,
+          timePurchase: String,
           ticketInfo:{
               id: {
                   type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +35,13 @@ var userSchema = new mongoose.Schema({
                   }, 
           },
           ticketNumber: String,
+          departure: String,
+          destination: String,
+          leavingDate: String,
+          arrivalDate: String,
+          leavingTime: String,
+          arrivalTime: String,
+          companyName: String,
           Class: String,
           cost: String,
           ticketHolder: {
