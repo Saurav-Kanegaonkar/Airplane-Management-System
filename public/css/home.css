@@ -13,7 +13,10 @@ body {
     padding-top: 40vh;
 }
 #landing-header h1 {
-    color: skyblue;
+    color: #FAEBEFFF;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 65px;
+
 }
 .slideshow { 
     position: fixed;

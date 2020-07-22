@@ -1,20 +1,125 @@
-<%- include('partials/header1') -%>
-    <h2>Payment History</h2>
-    <% console.log(user) %>
-    <%  user.ticketsPurchased.forEach(function(a){ %>
-        <p>Date purchased: <%= a.datePurchase %></p>
-        <p>Time purchased: <%= a.timePurchase %></p>
-        <p>Company name: <%= a.companyName %></p>
-        <p>Departure: <%= a.departure %></p>
-        <p>Destination: <%= a.destination %></p>
-        <p>Leaving Date: <%= a.leavingDate %></p>
-        <p>Arrival Date: <%= a.arrivalDate %></p>
-        <p>Leaving Time: <%= a.leavingTime %></p>
-        <p>Arrival Time: <%= a.arrivalTime %></p>
-        <p>Class: <%= a.Class %></p>
-        <p>Cost: <%= a.cost %></p>
-        <p>Ticket Holder: <%= a.ticketHolder.fname %> <%= a.ticketHolder.lname %></p>
-        <p>Ticket Holder Age: <%= a.ticketHolder.age %></p>
-        <p>Ticket Holder Gender: <%= a.ticketHolder.gender %></p>
-    <% }); %>
-<%- include('partials/footer1') -%>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Airline System</title>
+		<!-- CSS -->        
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/animate.css">
+		<link rel="stylesheet" href="/css/style.css">
+		<script src="https://kit.fontawesome.com/caacf6ad33.js" crossorigin="anonymous"></script>
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+
+	</head>
+	<style>
+		.costClass{
+			padding-top: 4px;
+			background-color: orange;
+			border: 3px dashed;
+			border-radius: 8px;
+		}
+	</style>
+
+	<body>
+		
+		<!-- Top menu -->
+		<nav class="navbar navbar-inverse" role="navigation" style="padding-right: 20px; padding-left: 20px;">
+				<div class="navbar-header">
+					<a href="/"><i class="fa fa-plane" aria-hidden="true" style="font-size:46px; padding-top: 13px;">Flyght</i>
+					</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/landing">Home</a></li>
+						<% if(currentUser){ %>
+							<li><a href="/logout">Logout</a></li>
+							<li><a href="/profile"><%= currentUser.username %></a></li>
+						<% } else{ %>
+							<li><a href="/login">Login</a></li>
+							<li><a href="/register">Register</a></li>
+						<% } %>
+					</ul>
+				</div>
+		</nav>
+		<% if(error && error.length>0 ){ %>
+			<div class="alert alert-danger" role="alert">
+				<h3><%= error %></h3>
+			</div>
+		<% } %>
+		<% if(success && success.length>0 ){ %>
+			<div class="alert alert-success" role="alert">
+				<h3><%= success %></h3 >
+			</div>
+		<% } %>
+
+		<h2>Payment History</h2>
+		<div class="card" style="background-color: #f7f7f7">
+
+			<div class="row col-sm-12" style="background-color: #EBFFFF">
+				<div class="col-sm-2">
+					<h2>Name</h2>
+				</div>
+				<div class="col-sm-6">
+					<div class="col-sm-6">
+						<h2>Dept</h2>
+					</div>
+					<div class="col-sm-6">
+						<h2>Destn</h2>
+					</div>
+				</div>
+
+				<div class="col-sm-4" style="vertical-align: middle;">
+					<div class="col-sm-5">
+						<h2>CompName</h2>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-6" style="margin-top: auto; margin-bottom: auto;">
+						<h2>Cost</h2>
+					</div>
+				</div>
+			</div>
+			<br>
+
+				<% user.ticketsPurchased.forEach(function(a){ %>
+				<div style="text-align: left;">
+					<h3><b><%= a.datePurchase %></b></h3>
+				</div>
+
+					<div class="row col-sm-12">
+						<div class="col-sm-2">
+							<h3><%= a.ticketHolder.fname %><br><%= a.ticketHolder.lname %></h3>
+						</div>
+						<div class="col-sm-6">
+							<div class="col-sm-6">
+								<h3><%= a.departure %><br><%= a.leavingDate %></h3>
+							</div>
+							<div class="col-sm-6">
+								<h3><%= a.destination %><br><%= a.arrivalDate %></h3>
+							</div>
+						</div>
+
+						<div class="col-sm-4" style="vertical-align: middle;">
+							<div class="col-sm-5">
+								<h3><%=a.companyName%></h3>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-6 costClass" style="margin-top: auto; margin-bottom: auto;">
+								<h3><i class="fas fa-rupee-sign"></i><%= a.cost %></h3>
+							</div>
+						</div>
+					</div>
+					<br><br>
+			<% }); %>
+		</div>
+	</div>
+	</body>
+</html>
+
